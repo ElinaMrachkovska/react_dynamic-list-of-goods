@@ -16,6 +16,7 @@ export const App: React.FC<Good[]> = () => {
     setErrors(null);
     try {
       const goods = await getAll();
+
       setAllGoods(goods);
     } catch (error) {
       setErrors(errors);
@@ -29,6 +30,7 @@ export const App: React.FC<Good[]> = () => {
     setErrors(null);
     try {
       const goods = await get5First();
+
       setAllGoods(goods);
     } catch (error) {
       setErrors(errors);
@@ -42,6 +44,7 @@ export const App: React.FC<Good[]> = () => {
     setErrors(null);
     try {
       const goods = await getRed();
+
       setAllGoods(goods);
     } catch (error) {
       setErrors(errors);
@@ -51,33 +54,37 @@ export const App: React.FC<Good[]> = () => {
   };
 
   return (
-  <div className="App">
-    <h1>Dynamic list of Goods</h1>
+    <div className="App">
+      <h1>Dynamic list of Goods</h1>
 
-    <button type="button" 
-    data-cy="all-button"
-    onClick={() => handleLoadAllGoods()}
-    disabled={loading}
-    >
-      Load all goods
-    </button>
+      <button
+        type="button"
+        data-cy="all-button"
+        onClick={() => handleLoadAllGoods()}
+        disabled={loading}
+      >
+        Load all goods
+      </button>
 
-    <button type="button" 
-    data-cy="first-five-button"
-    onClick={() => handleLoad5FirstGoods()}
-    disabled={loading}
-    >
-      Load 5 first goods
-    </button>
+      <button
+        type="button"
+        data-cy="first-five-button"
+        onClick={() => handleLoad5FirstGoods()}
+        disabled={loading}
+      >
+        Load 5 first goods
+      </button>
 
-    <button type="button"
-     data-cy="red-button"
-     onClick={() => handleLoadRedGoods()}
-     disabled={loading}>
-      Load red goods
-    </button>
+      <button
+        type="button"
+        data-cy="red-button"
+        onClick={() => handleLoadRedGoods()}
+        disabled={loading}
+      >
+        Load red goods
+      </button>
 
-    <GoodsList goods={allGoods} />
-  </div>
-);
-}
+      <GoodsList goods={allGoods} />
+    </div>
+  );
+};
