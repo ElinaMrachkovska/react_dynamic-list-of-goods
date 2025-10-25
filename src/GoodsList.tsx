@@ -5,16 +5,14 @@ interface Props {
   goods: Good[];
 }
 
-export const GoodsList: React.FC<Props> = React.memo(
-  ({ goods }) => {
-    const renderGood = (good: Good) => (
-      <li key={good.id} data-cy="good" style={{ color: good.color }}>
-        {good.name}
-      </li>
-    );
+export const GoodsList: React.FC<Props> = React.memo(({ goods }) => {
+  const renderGood = (good: Good) => (
+    <li key={good.id} data-cy="good" style={{ color: good.color }}>
+      {good.name}
+    </li>
+  );
 
-    return <ul>{goods.map(good => renderGood(good))}</ul>;
-  },
-);
+  return <ul>{goods.map(good => renderGood(good))}</ul>;
+});
 
-GoodsList.displayName = 'GoodsList'; 
+GoodsList.displayName = 'GoodsList';

@@ -12,9 +12,7 @@ export const App: React.FC<{}> = () => {
   const [errors, setErrors] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  {
-    errors && <p className="App__error">{errors}</p>;
-  }
+  // render errors conditionally inside the JSX below
 
   const handleLoadAllGoods = async () => {
     setLoading(true);
@@ -60,8 +58,8 @@ export const App: React.FC<{}> = () => {
 
   return (
     <div className="App">
-      <h1>Dynamic list of Goods</h1> /
-
+      <h1>Dynamic list of Goods</h1>
+      {errors && <p className="App__error">{errors}</p>}
       <button
         type="button"
         data-cy="all-button"
@@ -70,7 +68,6 @@ export const App: React.FC<{}> = () => {
       >
         Load all goods
       </button>
-
       <button
         type="button"
         data-cy="first-five-button"
@@ -79,7 +76,6 @@ export const App: React.FC<{}> = () => {
       >
         Load 5 first goods
       </button>
-
       <button
         type="button"
         data-cy="red-button"
@@ -88,7 +84,6 @@ export const App: React.FC<{}> = () => {
       >
         Load red goods
       </button>
-
       <GoodsList goods={allGoods} />
     </div>
   );
