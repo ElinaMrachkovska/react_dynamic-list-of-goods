@@ -2,14 +2,19 @@ import React from 'react';
 import './App.scss';
 import { GoodsList } from './GoodsList';
 import { Good } from './types/Good';
+
 import { getAll, get5First, getRed } from './api/goods';
 // or
 // import * as goodsAPI from './api/goods';
 
-export const App: React.FC<Good[]> = () => {
+export const App: React.FC<{}> = () => {
   const [allGoods, setAllGoods] = React.useState<Good[]>([]);
   const [errors, setErrors] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
+
+  {
+    errors && <p className="App__error">{errors}</p>;
+  }
 
   const handleLoadAllGoods = async () => {
     setLoading(true);
@@ -19,7 +24,7 @@ export const App: React.FC<Good[]> = () => {
 
       setAllGoods(goods);
     } catch (error) {
-      setErrors(errors);
+      setErrors((error as Error).message);
     } finally {
       setLoading(false);
     }
@@ -33,7 +38,7 @@ export const App: React.FC<Good[]> = () => {
 
       setAllGoods(goods);
     } catch (error) {
-      setErrors(errors);
+      setErrors((error as Error).message);
     } finally {
       setLoading(false);
     }
@@ -47,7 +52,7 @@ export const App: React.FC<Good[]> = () => {
 
       setAllGoods(goods);
     } catch (error) {
-      setErrors(errors);
+      setErrors((error as Error).message);
     } finally {
       setLoading(false);
     }
@@ -55,12 +60,12 @@ export const App: React.FC<Good[]> = () => {
 
   return (
     <div className="App">
-      <h1>Dynamic list of Goods</h1>
+      <h1>Dynamic list of Goods</h1> /
 
       <button
         type="button"
         data-cy="all-button"
-        onClick={() => handleLoadAllGoods()}
+        onClick={handleLoadAllGoods}
         disabled={loading}
       >
         Load all goods
@@ -69,7 +74,7 @@ export const App: React.FC<Good[]> = () => {
       <button
         type="button"
         data-cy="first-five-button"
-        onClick={() => handleLoad5FirstGoods()}
+        onClick={handleLoad5FirstGoods}
         disabled={loading}
       >
         Load 5 first goods
@@ -78,7 +83,7 @@ export const App: React.FC<Good[]> = () => {
       <button
         type="button"
         data-cy="red-button"
-        onClick={() => handleLoadRedGoods()}
+        onClick={handleLoadRedGoods}
         disabled={loading}
       >
         Load red goods

@@ -1,16 +1,20 @@
 import React from 'react';
 import { Good } from './types/Good';
 
-type Props = {
+interface Props {
   goods: Good[];
-};
+}
 
-export const GoodsList: React.FC<Props> = ({ goods }) => (
-  <ul>
-    {goods.map(good => (
+export const GoodsList: React.FC<Props> = React.memo(
+  ({ goods }) => {
+    const renderGood = (good: Good) => (
       <li key={good.id} data-cy="good" style={{ color: good.color }}>
         {good.name}
       </li>
-    ))}
-  </ul>
+    );
+
+    return <ul>{goods.map(good => renderGood(good))}</ul>;
+  },
 );
+
+GoodsList.displayName = 'GoodsList'; 
